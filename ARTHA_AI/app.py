@@ -66,7 +66,29 @@ html, body, [class*="css"] {
     background-color: #0d1117 !important;
     border-right: 1px solid #21262d;
 }
-[data-testid="stSidebar"] .stMarkdown { color: #8b949e; }
+[data-testid="stSidebar"] * { color: #e6edf3 !important; }
+[data-testid="stSidebar"] .stMarkdown p { color: #c9d1d9 !important; }
+[data-testid="stSidebar"] label { color: #e6edf3 !important; font-weight: 600 !important; }
+[data-testid="stSidebar"] .stRadio label { color: #e6edf3 !important; font-size: 13px !important; }
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p { color: #8b949e !important; }
+/* Radio button selected state */
+[data-testid="stSidebar"] [data-testid="stRadio"] label[data-baseweb="radio"] span {
+    color: #e6edf3 !important;
+}
+/* Active radio option highlight */
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:hover {
+    background: rgba(0,212,255,0.08) !important;
+    border-radius: 6px !important;
+}
+/* Sidebar navigation text bright */
+[data-testid="stSidebar"] p,
+[data-testid="stSidebar"] span,
+[data-testid="stSidebar"] div {
+    color: #e6edf3 !important;
+}
+/* Dim the metadata text at bottom */
+[data-testid="stSidebar"] .element-container:last-child p,
+[data-testid="stSidebar"] .element-container:last-child span { color: #484f58 !important; }
 
 /* ── Cards ── */
 .artha-card {
@@ -260,29 +282,45 @@ def render_header():
 def render_sidebar():
     with st.sidebar:
         st.markdown("""
-        <div style="padding:20px 0 12px 0;">
-            <div style="font-size:18px;font-weight:700;color:#e6edf3;font-family:'IBM Plex Mono',monospace;">
-                ⚡ ARTHA AI
+        <div style="padding:24px 4px 16px 4px;">
+            <div style="font-size:22px;font-weight:800;color:#ffffff;font-family:'IBM Plex Mono',monospace;letter-spacing:-0.5px;">
+                ⚡ <span style="color:#00d4ff;">ARTHA</span> AI
             </div>
-            <div style="font-size:10px;color:#8b949e;letter-spacing:1.5px;margin-top:4px;">
+            <div style="font-size:10px;color:#c9d1d9;letter-spacing:2px;margin-top:6px;font-family:'IBM Plex Mono',monospace;font-weight:500;">
                 MARKET OPERATING SYSTEM
+            </div>
+            <div style="margin-top:10px;display:flex;align-items:center;gap:6px;">
+                <div style="width:7px;height:7px;border-radius:50%;background:#00ff88;box-shadow:0 0 6px #00ff88;"></div>
+                <span style="font-size:10px;color:#00ff88;font-family:'IBM Plex Mono',monospace;font-weight:600;letter-spacing:1px;">LIVE · NSE</span>
             </div>
         </div>
         <div style="height:1px;background:#21262d;margin-bottom:20px;"></div>
+        <div style="font-size:11px;color:#c9d1d9;letter-spacing:2px;font-family:'IBM Plex Mono',monospace;font-weight:700;margin-bottom:10px;padding:0 4px;">
+            NAVIGATION
+        </div>
         """, unsafe_allow_html=True)
 
         menu = st.radio(
-            "NAVIGATION",
+            "nav",
             ["🎯 Opportunity Radar", "🔍 Stock Deep Dive", "💬 Market Chat", "📊 Portfolio Analyzer", "🎬 Video Generator"],
-            label_visibility="visible",
+            label_visibility="collapsed",
         )
 
         st.markdown("""
-        <div style="height:1px;background:#21262d;margin:20px 0;"></div>
-        <div style="font-size:10px;color:#3d4450;letter-spacing:1px;font-family:'IBM Plex Mono',monospace;">
-            DATA: NSE LIVE VIA YFINANCE<br>
-            REFRESH: 60 SEC AUTO<br>
-            VERSION: 1.0.0
+        <div style="height:1px;background:#21262d;margin:24px 0 16px 0;"></div>
+        <div style="padding:12px;background:#161b22;border-radius:8px;border:1px solid #21262d;">
+            <div style="font-size:11px;color:#c9d1d9;letter-spacing:1px;font-family:'IBM Plex Mono',monospace;line-height:2.2;">
+                📡 &nbsp;NSE LIVE via yfinance<br>
+                🔄 &nbsp;Auto-refresh: 60 sec<br>
+                🏷️ &nbsp;Version: 1.0.0<br>
+                🇮🇳 &nbsp;Indian Markets Only
+            </div>
+        </div>
+        <div style="margin-top:16px;padding:0 4px;">
+            <div style="font-size:9px;color:#484f58;letter-spacing:1px;font-family:'IBM Plex Mono',monospace;line-height:1.8;">
+                ⚠️ FOR EDUCATIONAL USE ONLY<br>
+                NOT SEBI-REGISTERED ADVICE
+            </div>
         </div>
         """, unsafe_allow_html=True)
 
